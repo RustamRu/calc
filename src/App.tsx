@@ -1,8 +1,12 @@
-function App() {
+import { FC } from "react";
+import {  Display } from "./components";
+
+
+export const App: FC = () => {
+
   return (
-    <div className="App">
+    <div>
+      <Display />
     </div>
   );
-}
-
-export default App;
+};
