@@ -1,5 +1,5 @@
 import { SIMPLE_MODE } from "../../data/var";
-import { Mode } from "../../store/calculationSlice";
+import { Mode } from "../../types/calculation";
 
 
 export const getOutput = (displayMode: Mode, operand1: number, operand2: number, result: number) => {

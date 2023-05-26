@@ -1,18 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
+import { Digit } from '../types';
+import { IOutputState, Operation } from '../types/calculation';
 
-export type Mode = 'operand1Input' | 'operand2Input' | 'resultOutput';
-type Operation = '+';
 
-interface OutputState {
-  displayMode: Mode,
-  operand1: number,
-  operand2: number,
-  operation: Operation | null;
-  result: number,
-}
-
-const initialState: OutputState = {
+const initialState: IOutputState = {
   displayMode: 'operand1Input',
   operand1: 0,
   operand2: 0,
