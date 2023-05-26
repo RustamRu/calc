@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import { Digit } from '../types';
-import { IOutputState, Operation } from '../types/calculation';
+import { IOutputState } from '../types/calculation';
 
 
 const initialState: IOutputState = {
@@ -16,10 +16,12 @@ export const calculationSlice = createSlice({
   name: 'calculation',
   initialState,
   reducers: {
+    input: (state, action: PayloadAction<Digit>) => {
+    },
   },
 })
 
-export const { } = calculationSlice.actions;
+export const { input } = calculationSlice.actions;
 
 export const selectMode = (state: RootState) => state.calculation.displayMode;
 export const selectOperand1 = (state: RootState) => state.calculation.operand1;

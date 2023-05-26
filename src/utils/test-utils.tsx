@@ -5,11 +5,12 @@ import calculationReducer from '../store/calculationSlice';
 import type { RenderOptions } from '@testing-library/react'
 import type { PreloadedState } from '@reduxjs/toolkit'
 import type { AppStore, RootState } from '../store';
+import { MockStore } from 'redux-mock-store';
 
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>
-  store?: AppStore
+  store?: AppStore | MockStore;
 }
 
 export function renderWithProviders(

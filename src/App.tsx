@@ -1,5 +1,5 @@
 import { FC } from "react";
-import {  Display } from "./components";
+import {DigitButton, Display } from "./components";
 
 
 export const App: FC = () => {
@@ -7,6 +7,17 @@ export const App: FC = () => {
   return (
     <div>
       <Display />
+
+      <DigitButton digit={0} />
+      <DigitButton digit={1} />
+      <DigitButton digit={2} />
+      <DigitButton digit={3} />
+      <DigitButton digit={4} />
+      <DigitButton digit={5} />
+      <DigitButton digit={6} />
+      <DigitButton digit={7} />
+      <DigitButton digit={8} />
+      <DigitButton digit={9} />
     </div>
   );
 };
