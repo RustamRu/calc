@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { Digit } from '../types';
-import { IOutputState } from '../types/calculation';
+import { IOutputState, InputChar } from '../types/calculation';
+import { addCharToOperandOutput } from './calculationSlice.helper';
 
 
 export const initialState: IOutputState = {
@@ -16,7 +16,21 @@ export const calculationSlice = createSlice({
   name: 'calculation',
   initialState,
   reducers: {
-    input: (state, action: PayloadAction<Digit>) => {
+    input: (state, { payload: char }: PayloadAction<InputChar>) => {
+      switch (state.displayMode) {
+        case 'resultOutput':
+          state.displayMode = 'operand1Input';
+          state.operand1 = addCharToOperandOutput(char, '0');
+          break;
+        case 'operand1Input':
+          state.operand1 = addCharToOperandOutput(char, state.operand1);
+          break;
+        case 'operand2Input':
+          state.operand2 = addCharToOperandOutput(char, state.operand2);
+          break;
+        default:
+          break;
+      }
     },
   },
 })
