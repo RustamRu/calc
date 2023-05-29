@@ -1,8 +1,8 @@
 import { SIMPLE_MODE } from "../../data/var";
-import { Mode } from "../../types/calculation";
+import { CalculationResult, Mode, Operand, Output } from "../../types/calculation";
 
 
-export const getOutput = (displayMode: Mode, operand1: number, operand2: number, result: number) => {
+export const getOutput = (displayMode: Mode, operand1: Operand, operand2: Operand, result: CalculationResult): Output => {
   switch (displayMode) {
     case 'operand1Input':
       return operand1;
@@ -17,19 +17,21 @@ function replaceDecimalSeparator(value: string): string {
   return value.replace(".", ",");
 };
 
-export const formatOutput = (output: number): string => {
-  if (output === +Infinity || output === -Infinity || Number.isNaN(output)) {
+export const formatOutput = (output: Output): Output => {
+  const numberOutput = Number(output);
+
+  if (numberOutput === +Infinity || numberOutput === -Infinity || Number.isNaN(numberOutput)) {
     return "Результат не определен";
   }
 
-  if (output > Number.MAX_SAFE_INTEGER || output < Number.MIN_SAFE_INTEGER) {
+  if (numberOutput > Number.MAX_SAFE_INTEGER || numberOutput < Number.MIN_SAFE_INTEGER) {
     return "Превышен диапазон";
   }
 
-  let stringOutput = String(output);
+  let stringOutput = String(numberOutput);
   if (stringOutput.length > SIMPLE_MODE.OUTPUT_LIMIT) {
     const specialSymbolsAmount = 6;
-    stringOutput = String(output.toExponential(SIMPLE_MODE.OUTPUT_LIMIT - specialSymbolsAmount));
+    stringOutput = String(numberOutput.toExponential(SIMPLE_MODE.OUTPUT_LIMIT - specialSymbolsAmount));
   }
   return replaceDecimalSeparator(stringOutput);
 }

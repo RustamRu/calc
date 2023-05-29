@@ -4,12 +4,12 @@ import { Digit } from '../types';
 import { IOutputState } from '../types/calculation';
 
 
-const initialState: IOutputState = {
+export const initialState: IOutputState = {
   displayMode: 'operand1Input',
-  operand1: 0,
-  operand2: 0,
+  operand1: '0',
+  operand2: '0',
   operation: null,
-  result: 0,
+  result: '0',
 }
 
 export const calculationSlice = createSlice({
