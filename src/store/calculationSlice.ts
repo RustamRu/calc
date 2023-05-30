@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { IOutputState, InputChar } from '../types/calculation';
+import { IOutputState, InputChar, Operation } from '../types/calculation';
 import { addCharToOperandOutput } from './calculationSlice.helper';
 
 
@@ -32,10 +32,36 @@ export const calculationSlice = createSlice({
           break;
       }
     },
+    setOperation: (state, { payload: operation }: PayloadAction<Operation>) => {
+      switch (operation) {
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+          switch (state.displayMode) {
+            case 'resultOutput':
+              state.operand1 = String(Number(state.result));
+              break;
+            case 'operand1Input':
+              state.operand1 = String(Number(state.operand1));
+              break;
+            default:
+              break;
+          }
+          state.displayMode = 'operand2Input';
+          state.operand2 = '0';
+          break;
+        default:
+          break;
+      }
+      state.operation = operation;
+    },
+    calculate: (state) => {
+    },
   },
 })
 
-export const { input } = calculationSlice.actions;
+export const { input, setOperation } = calculationSlice.actions;
 
 export const selectMode = (state: RootState) => state.calculation.displayMode;
 export const selectOperand1 = (state: RootState) => state.calculation.operand1;
